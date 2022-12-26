@@ -7,8 +7,14 @@ describe('app', function () {
   });
 
   it('should return app', function () {
-    const app = tabri();
+    const server = tabri();
 
-    assert.equal(typeof app, 'object');
+    assert.equal(typeof server, 'object');
+  });
+
+  it('should return port from constructor config', function () {
+    const server = tabri(4000);
+
+    assert.equal(server.app.get('port'), 4000);
   });
 });
