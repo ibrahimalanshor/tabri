@@ -6,7 +6,7 @@ describe('app', function () {
     assert.equal(typeof tabri, 'function');
   });
 
-  it('should return object', function () {
+  it('should return app', function () {
     const app = tabri();
 
     assert.equal(typeof app, 'object');
