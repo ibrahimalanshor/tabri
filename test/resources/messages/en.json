@@ -1,3 +1,6 @@
 {
-	"test": "Hello World"
+	"test": "Hello World",
+	"http": {
+		"500": "Internal Server Error"
+	}
 }

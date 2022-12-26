@@ -8,6 +8,9 @@ describe('app', function () {
     const router = Router();
 
     router.get('/test', (req, res) => res.json(req.polyglot.t('test')));
+    router.get('/error', (req, res) => {
+      throw new Error();
+    });
 
     this.server = tabri({
       port: 5000,
@@ -91,6 +94,21 @@ describe('app', function () {
         if (err) {
           return done(err);
         }
+
+        done();
+      });
+  });
+
+  it('should returns 500 error', function (done) {
+    request('http://localhost:5000')
+      .get('/error')
+      .expect(500)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        assert.equal(res.body.status, 500);
 
         done();
       });
