@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "prepare": "husky install"
   },
   "author": "Ibrahim Al Anshor",
@@ -14,7 +14,8 @@
     "husky": "^8.0.2",
     "lint-staged": "^13.1.0",
     "mocha": "^10.2.0",
-    "prettier": "2.8.1"
+    "prettier": "2.8.1",
+    "supertest": "^6.3.3"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",

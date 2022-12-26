@@ -1,4 +1,5 @@
 const assert = require('assert');
+const request = require('supertest');
 const tabri = require('../');
 
 describe('app', function () {
@@ -13,8 +14,19 @@ describe('app', function () {
   });
 
   it('should return port from constructor config', function () {
-    const server = tabri(4000);
+    const server = tabri({ port: 5000 });
 
-    assert.equal(server.app.get('port'), 4000);
+    assert.equal(server.app.get('port'), 5000);
+  });
+
+  it('should run app', function (done) {
+    const server = tabri({
+      port: 5000,
+      logging: false,
+    });
+
+    server.run(() => {});
+
+    request('http://localhost:5000').get('/').expect(404, done);
   });
 });
