@@ -1,8 +1,14 @@
 const assert = require('assert');
 const tabri = require('../');
 
-describe('testing', function () {
-  it('should be', function () {
-    assert.equal('10', 50);
+describe('app', function () {
+  it('should be callable', function () {
+    assert.equal(typeof tabri, 'function');
+  });
+
+  it('should return object', function () {
+    const app = tabri();
+
+    assert.equal(typeof app, 'object');
   });
 });
