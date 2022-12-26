@@ -1,9 +1,14 @@
+const { Router } = require('express');
 const assert = require('assert');
 const request = require('supertest');
 const tabri = require('../');
 
 describe('app', function () {
   before(function () {
+    const router = Router();
+
+    router.get('/test', (req, res) => res.json(req.polyglot.t('test')));
+
     this.server = tabri({
       port: 5000,
       logging: false,
@@ -15,6 +20,7 @@ describe('app', function () {
         messages: require('./resources/messages'),
         defaultLocale: 'en',
       },
+      routes: [router],
     });
 
     this.server.run(() => {});
@@ -63,10 +69,6 @@ describe('app', function () {
   });
 
   it('should returns translated message', function (done) {
-    this.server.app.get('/test', (req, res) =>
-      res.json(req.polyglot.t('test'))
-    );
-
     request('http://localhost:5000')
       .get('/test')
       .expect(200)
@@ -76,6 +78,19 @@ describe('app', function () {
         }
 
         assert.equal(res.body, 'Hello World');
+
+        done();
+      });
+  });
+
+  it('should returns route responds', function (done) {
+    request('http://localhost:5000')
+      .get('/test')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
 
         done();
       });
