@@ -9,7 +9,11 @@ describe('app', function () {
       logging: false,
       static: {
         path: '/public',
-        dir: __dirname + '/static',
+        dir: __dirname + '/resources/static',
+      },
+      i18n: {
+        messages: require('./resources/messages'),
+        defaultLocale: 'en',
       },
     });
 
@@ -53,6 +57,25 @@ describe('app', function () {
         if (err) {
           return done(err);
         }
+
+        done();
+      });
+  });
+
+  it('should returns translated message', function (done) {
+    this.server.app.get('/test', (req, res) =>
+      res.json(req.polyglot.t('test'))
+    );
+
+    request('http://localhost:5000')
+      .get('/test')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        assert.equal(res.body, 'Hello World');
 
         done();
       });
