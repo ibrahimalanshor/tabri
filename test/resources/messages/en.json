@@ -1,0 +1,7 @@
+{
+	"test": "Hello World",
+	"http": {
+		"401": "Unauthorized",
+		"500": "Internal Server Error"
+	}
+}
