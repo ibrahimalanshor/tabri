@@ -1,7 +1,7 @@
 {
-  "name": "tabri",
-  "version": "0.0.0",
-  "description": "",
+  "name": "@ibrahimalanshor/tabri",
+  "version": "0.0.2",
+  "description": "tabri",
   "main": "index.js",
   "scripts": {
     "test": "mocha --exit",
@@ -30,5 +30,22 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-polyglot": "^2.4.2"
-  }
+  },
+  "files": [
+    "README.md",
+    "index.js",
+    "lib/"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibrahimalanshor/tabri.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ibrahimalanshor/tabri/issues"
+  },
+  "homepage": "https://github.com/ibrahimalanshor/tabri#readme"
 }
