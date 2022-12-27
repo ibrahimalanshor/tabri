@@ -17,6 +17,10 @@ describe('exceptions', function () {
     this.server.run(() => {});
   });
 
+  after(function () {
+    this.server.stop();
+  });
+
   it('should returns exception list', function () {
     assert.equal(typeof tabri.exceptions, 'object');
   });
