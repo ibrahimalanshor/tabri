@@ -15,7 +15,7 @@ describe('request validator', function () {
             tabri.createRequestValidator([
               body('name').isString().withMessage('validation.string'),
             ]),
-            (req, res, next) => res.json('get route'),
+            (req, res, next) => res.json(req.body),
           ],
         },
       ]),
@@ -43,6 +43,23 @@ describe('request validator', function () {
 
         assert.equal(typeof res.body.errors, 'object');
         assert.equal(res.body.errors.name.param, 'name');
+
+        done();
+      });
+  });
+
+  it('should return only field in rules', function (done) {
+    request('http://localhost:5000')
+      .post('/request-validator')
+      .send({ name: 'test', danger: 'value' })
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        assert.equal(res.body.name, 'test');
+        assert.equal(Object.keys(res.body).length, 1);
 
         done();
       });
