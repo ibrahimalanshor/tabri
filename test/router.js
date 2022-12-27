@@ -26,7 +26,7 @@ describe('router', function () {
     assert.equal(typeof tabri.createRouter, 'function');
   });
 
-  it('should get a route', function () {
+  it('should get a route', function (done) {
     request('http://localhost:5000')
       .get('/router')
       .expect(200)

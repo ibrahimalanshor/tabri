@@ -1,11 +1,14 @@
 {
 	"test": "Hello World",
 	"http": {
+		"400": "Bad Request",
 		"401": "Unauthorized",
 		"422": "Unprocessable Entity",
 		"500": "Internal Server Error"
 	},
 	"validation": {
-		"string": "%{path} must be string"
+		"string": "%{path} must be string",
+		"file-required": "file required",
+		"mime": "file not supported"
 	}
 }
