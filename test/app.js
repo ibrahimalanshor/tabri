@@ -2,6 +2,7 @@ const { Router } = require('express');
 const assert = require('assert');
 const request = require('supertest');
 const tabri = require('../');
+const server = require('./resources/server.js');
 
 describe('app', function () {
   before(function () {
@@ -12,19 +13,7 @@ describe('app', function () {
       throw new Error();
     });
 
-    this.server = tabri({
-      port: 5000,
-      logging: false,
-      static: {
-        path: '/public',
-        dir: __dirname + '/resources/static',
-      },
-      i18n: {
-        messages: require('./resources/messages'),
-        defaultLocale: 'en',
-      },
-      routes: [router],
-    });
+    this.server = server({ routes: router });
 
     this.server.run(() => {});
   });
