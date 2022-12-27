@@ -8,7 +8,7 @@ describe('upload', function () {
     const storage = tabri.createStorage({
       field: 'file',
       allowedExtension: ['.png'],
-      getPath: () => __dirname + '/resources/uploads',
+      getPath: () => __dirname + '/resources/public',
       getFilename: () => 'upload.png',
     });
 
@@ -50,6 +50,38 @@ describe('upload', function () {
         }
 
         assert.equal(res.body.message, 'file required');
+
+        done();
+      });
+  });
+
+  it('should return validation file extension error', function (done) {
+    request('http://localhost:5000')
+      .post('/upload')
+      .attach('file', __dirname + '/resources/uploads/test.json')
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        assert.equal(res.body.message, 'file not supported');
+
+        done();
+      });
+  });
+
+  it('should success upload file', function (done) {
+    request('http://localhost:5000')
+      .post('/upload')
+      .attach('file', __dirname + '/resources/uploads/image.png')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        assert.equal(res.body.filename, 'upload.png');
 
         done();
       });

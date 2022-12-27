@@ -7,6 +7,8 @@
 		"500": "Internal Server Error"
 	},
 	"validation": {
-		"string": "%{path} must be string"
+		"string": "%{path} must be string",
+		"file-required": "file required",
+		"mime": "file not supported"
 	}
 }
